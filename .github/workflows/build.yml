@@ -81,7 +81,6 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         brew upgrade
-        brew install llvm
         brew install cmake
         brew install ninja
         cd "$GITHUB_WORKSPACE"
