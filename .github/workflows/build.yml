@@ -1,4 +1,4 @@
-name: DevBuilda
+name: DevBuild
 on: [push]
 
 jobs:
