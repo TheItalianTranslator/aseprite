@@ -52,8 +52,22 @@ jobs:
     - name: windows-latest
       if: runner.os == 'Windows'
       run: |
-        choco list --local-only
-
+        choco uninstall mingw
+        choco uninstall strawberryperl
+        choco uninstall openssl
+        choco upgrade all
+        choco install llvm
+        Remove-Item -Recurse -Force 'C:/Program Files/OpenSSL'
+        Set-Location 'D:/a/aseprite/aseprite'
+        curl -LO https://github.com/aseprite/skia/releases/download/m102-861e4743af/Skia-Windows-Release-x64.zip
+        New-Item -ItemType Directory -Path 'D:/a/aseprite/deps'
+        New-Item -ItemType Directory -Path 'D:/a/aseprite/deps/skia'
+        Move-Item 'Skia-Windows-Release-x64.zip' 'D:/a/aseprite/deps/skia/'
+        Set-Location 'D:/a/aseprite/deps/skia'
+        Expand-Archive 'Skia-Windows-Release-x64.zip' -DestinationPath .
+        Remove-Item 'Skia-Windows-Release-x64.zip'
+        Set-Location 'D:/a/aseprite/aseprite'
+        New-Item -ItemType Directory -Path 'build'
 
     - name: windows-latest-compile
       if: runner.os == 'Windows'
