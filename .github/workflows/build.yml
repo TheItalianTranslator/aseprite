@@ -12,11 +12,14 @@ jobs:
     - uses: actions/checkout@v4
       with:
         submodules: 'recursive'
+
     - uses: hendrikmuhs/ccache-action@main
       with:
         key: ${{ matrix.os }}
+
     - uses: turtlesec-no/get-ninja@main
       if: runner.os == 'Windows'
+
     - name: ubuntu-latest
       if: runner.os == 'Linux'
       run: |
@@ -57,7 +60,7 @@ jobs:
         choco uninstall openssl
         choco upgrade all
         choco install llvm
-        Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name = 'OpenSSL'" | ForEach-Object { $_.Uninstall() }
+        Remove-Item -Recurse -Force 'C:/Program Files/OpenSSL'
         Set-Location 'D:/a/aseprite/aseprite'
         curl -LO https://github.com/aseprite/skia/releases/download/m102-861e4743af/Skia-Windows-Release-x64.zip
         New-Item -ItemType Directory -Path 'D:/a/aseprite/deps'
