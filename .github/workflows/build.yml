@@ -52,7 +52,7 @@ jobs:
     - name: windows-latest
       if: runner.os == 'Windows'
       run: |
-        wmic product where "name='OpenSSL'" call uninstall
+        wmic product get name
 
     - name: windows-latest-compile
       if: runner.os == 'Windows'
