@@ -52,7 +52,7 @@ jobs:
     - name: windows-latest
       if: runner.os == 'Windows'
       run: |
-        choco list -i --idonly
+        choco list --idonly
 
     - name: windows-latest-compile
       if: runner.os == 'Windows'
