@@ -13,11 +13,13 @@ jobs:
       with:
         submodules: 'recursive'
     - uses: hendrikmuhs/ccache-action@main
+      if: ${{ runner.os == 'Linux' || runner.os == 'macOS' }}
       with:
         key: ${{ matrix.os }}
+    - uses: mozilla-actions/sccache-action@main
+      if: runner.os == 'Windows'
     - uses: turtlesec-no/get-ninja@main
       if: runner.os == 'Windows'
-
     - name: ubuntu-latest
       if: runner.os == 'Linux'
       run: |
@@ -74,7 +76,7 @@ jobs:
       run: |
         call "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/Common7/Tools/VsDevCmd.bat" -arch=x64
         cd D:/a/aseprite/aseprite/build
-        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLAF_BACKEND=skia -DSKIA_DIR=D:/a/aseprite/deps/skia -DSKIA_LIBRARY_DIR=D:/a/aseprite/deps/skia/out/Release-x64 -DSKIA_LIBRARY=D:/a/aseprite/deps/skia/out/Release-x64/skia.lib -G Ninja ..
+        cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DLAF_BACKEND=skia -DSKIA_DIR=D:/a/aseprite/deps/skia -DSKIA_LIBRARY_DIR=D:/a/aseprite/deps/skia/out/Release-x64 -DSKIA_LIBRARY=D:/a/aseprite/deps/skia/out/Release-x64/skia.lib -DCMAKE_C_COMPILER_LAUNCHER=sccache -DCMAKE_CXX_COMPILER_LAUNCHER=sccache -G Ninja ..
         ninja aseprite
 
     - name: macos-latest
