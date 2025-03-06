@@ -52,7 +52,7 @@ jobs:
     - name: windows-latest
       if: runner.os == 'Windows'
       run: |
-        wmic product get name
+        Get-WmiObject -Query "SELECT * FROM Win32_Product WHERE Name = 'OpenSSL'" | ForEach-Object { $_.Uninstall() }
 
     - name: windows-latest-compile
       if: runner.os == 'Windows'
