@@ -24,7 +24,8 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update -y
-        sudo apt-get upgrade -y
+        sudo apt-get full-upgrade -y
+        sudo apt autoremove -y
         sudo apt-get install -y g++ clang libc++-dev libc++abi-dev cmake ninja-build libx11-dev libxcursor-dev libxi-dev libgl1-mesa-dev libfontconfig1-dev unzip
         cd "$GITHUB_WORKSPACE"
         wget https://github.com/aseprite/skia/releases/download/m102-861e4743af/Skia-Linux-Release-x64-libc++.zip
@@ -82,7 +83,9 @@ jobs:
     - name: macos-latest
       if: runner.os == 'macOS'
       run: |
+        brew update
         brew upgrade
+        brew cleanup
         brew install cmake
         brew install ninja
         cd "$GITHUB_WORKSPACE"
