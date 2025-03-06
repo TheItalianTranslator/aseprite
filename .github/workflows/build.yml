@@ -52,7 +52,8 @@ jobs:
     - name: windows-latest
       if: runner.os == 'Windows'
       run: |
-        choco list --idonly
+        Get-WmiObject -Class Win32_Product | Select-Object Name
+
 
     - name: windows-latest-compile
       if: runner.os == 'Windows'
