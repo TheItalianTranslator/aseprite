@@ -1,6 +1,6 @@
 name: build-auto
 on:
-  push:
+  doasodasd:
     paths:
     - '.github/workflows/build-auto.yml'
     - 'build.sh'
