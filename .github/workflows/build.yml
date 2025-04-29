@@ -27,7 +27,7 @@ jobs:
         sudo apt-get update -y
         sudo apt-get full-upgrade -y
         sudo apt autoremove -y
-        sudo apt-get install -y g++ clang-12 cmake ninja-build libx11-dev libxcursor-dev libxi-dev libgl1-mesa-dev libfontconfig1-dev unzip
+        sudo apt-get install -y g++ clang cmake ninja-build libx11-dev libxcursor-dev libxi-dev libgl1-mesa-dev libfontconfig1-dev unzip
         cd "$GITHUB_WORKSPACE"
         wget https://github.com/aseprite/skia/releases/download/m124-08a5439a6b/Skia-Linux-Release-x64.zip
         mkdir $HOME/deps
